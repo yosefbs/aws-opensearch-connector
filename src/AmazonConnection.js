@@ -16,6 +16,10 @@ module.exports = awsConfig => {
       // the port number which will cause signature verification to fail
       req.headers.host = req.hostname
 
+      // This fix allows the connector to work with the older 6.x elastic branch.
+      // The problem with that version, is that the Transport object would add a
+      // `Content-Length` header (yes with Pascal Case), thus duplicating headers
+      // (`Content-Length` and `content-length`), which makes the signature fail.
       let contentLength = 0
       if (params.body) {
         contentLength = Buffer.byteLength(params.body, 'utf8')
