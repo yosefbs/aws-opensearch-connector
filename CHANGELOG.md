@@ -1,5 +1,17 @@
 # Changelog
 
+## [v9.0.1](https://github.com/compwright/aws-elasticsearch-connector/tree/v9.0.1) (2020-11-17)
+
+[Full Changelog](https://github.com/compwright/aws-elasticsearch-connector/compare/v9.0.0...v9.0.1)
+
+**Closed issues:**
+
+- Setting AWS.Config httpOptions does not work [\#23](https://github.com/compwright/aws-elasticsearch-connector/issues/23)
+
+**Merged pull requests:**
+
+- Add support for elasticSearch 6.x branch [\#20](https://github.com/compwright/aws-elasticsearch-connector/pull/20) ([osdroid](https://github.com/osdroid))
+
 ## [v9.0.0](https://github.com/compwright/aws-elasticsearch-connector/tree/v9.0.0) (2020-07-04)
 
 [Full Changelog](https://github.com/compwright/aws-elasticsearch-connector/compare/v8.3.0...v9.0.0)
