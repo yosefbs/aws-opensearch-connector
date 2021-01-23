@@ -1,5 +1,18 @@
 # Changelog
 
+## [v9.0.3](https://github.com/compwright/aws-elasticsearch-connector/tree/v9.0.3) (2021-01-23)
+
+[Full Changelog](https://github.com/compwright/aws-elasticsearch-connector/compare/v9.0.1...v9.0.3)
+
+**Closed issues:**
+
+- AWS ElasticSearch Custom domain names not connecting [\#24](https://github.com/compwright/aws-elasticsearch-connector/issues/24)
+- aws sigv4 signature not match when Content-Length exist in the request before applying AmazonConnection [\#22](https://github.com/compwright/aws-elasticsearch-connector/issues/22)
+
+**Merged pull requests:**
+
+- Set region when signing request if provided in the AWS config object [\#26](https://github.com/compwright/aws-elasticsearch-connector/pull/26) ([chsing-br](https://github.com/chsing-br))
+
 ## [v9.0.1](https://github.com/compwright/aws-elasticsearch-connector/tree/v9.0.1) (2020-11-17)
 
 [Full Changelog](https://github.com/compwright/aws-elasticsearch-connector/compare/v9.0.0...v9.0.1)
