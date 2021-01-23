@@ -59,7 +59,7 @@
   },
   "devDependencies": {
     "@elastic/elasticsearch": "^7.10.0",
-    "aws-sdk": "^2.709.0",
+    "aws-sdk": "^2.831.0",
     "minimist": "^1.2.5",
     "mocha": "^8.2.1",
     "nyc": "^15.1.0",
