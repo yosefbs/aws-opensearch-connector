@@ -1,4 +1,4 @@
-const { Connection } = require('@elastic/elasticsearch')
+const { Connection } = require('@opensearch-project/opensearch')
 const aws4 = require('aws4')
 
 module.exports = awsConfig => {

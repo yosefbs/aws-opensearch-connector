@@ -1,7 +1,7 @@
 'use strict'
 
 const assert = require('assert')
-const { Transport } = require('@elastic/elasticsearch')
+const { Transport } = require('@opensearch-project/opensearch')
 const AWS = require('aws-sdk')
 
 const awsConfig = new AWS.Config({

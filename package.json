@@ -1,11 +1,11 @@
 {
-  "name": "aws-elasticsearch-connector",
-  "version": "9.0.3",
-  "description": "A tiny Amazon Signature Version 4 connection class for @elastic/elasticsearch, for compatibility with AWS Elasticsearch and IAM authentication.",
-  "repository": "https://github.com/compwright/aws-elasticsearch-connector",
-  "bugs": "https://github.com/compwright/aws-elasticsearch-connector/issues",
+  "name": "aws-opensearch-connector",
+  "version": "1.0.0",
+  "description": "A tiny Amazon Signature Version 4 connection class for @opensearch-project/opensearch, for compatibility with AWS `opensearch` and IAM authentication.",
+  "repository": "https://github.com/yosefbs/aws-opensearch-connector",
+  "bugs": "https://github.com/yosefbs/aws-opensearch-connector/issues",
   "keywords": [
-    "elasticsearch",
+    "opensearch",
     "aws-es",
     "aws",
     "aws4",
@@ -23,21 +23,18 @@
   },
   "main": "src/index.js",
   "scripts": {
-    "publish": "git push origin --tags && npm run changelog && git push origin",
+    "publish": "git push origin --tags &&  git push origin",
     "release:pre": "npm version prerelease && npm publish --tag pre",
     "release:patch": "npm version patch && npm publish",
     "release:minor": "npm version minor && npm publish",
     "release:major": "npm version major && npm publish",
-    "changelog": "github_changelog_generator -u compwright -p aws-elasticsearch-connector && git add CHANGELOG.md && git commit -am \"Updating changelog\"",
     "lint": "standard src/*.js tests/*.js --fix",
     "pretest": "npm run lint",
     "test": "AWS_PROFILE=null nyc --all mocha tests/Amazon*.test.js",
     "test:integration": "mocha tests/integration.test.js"
   },
   "author": {
-    "name": "Jonathon Hill",
-    "email": "jonathon@compwright.com",
-    "url": "https://compwright.com"
+    "name": "yosef bs"
   },
   "license": "MIT",
   "standard": {
@@ -54,12 +51,12 @@
     "aws4": "^1.11.0"
   },
   "peerDependencies": {
-    "@elastic/elasticsearch": ">=6",
-    "aws-sdk": "^2.793.0"
+    "opensearch-project/opensearch": ">=1.0.0",
+    "aws-sdk": "^2.683.0"
   },
   "devDependencies": {
-    "@elastic/elasticsearch": "^7.10.0",
-    "aws-sdk": "^2.831.0",
+    "@opensearch-project/opensearch": "^1.0.0",
+    "aws-sdk": "^2.683.0",
     "minimist": "^1.2.5",
     "mocha": "^8.2.1",
     "nyc": "^15.1.0",
