@@ -1,6 +1,5 @@
 # aws-opensearch-connector
 
-[![Build Status](https://travis-ci.org/yosefbs/aws-opensearch-connector.png?branch=master)](https://travis-ci.org/yosefbs/aws-opensearch-connector)
 [![Download Status](https://img.shields.io/npm/dm/aws-opensearch-connector.svg?style=flat-square)](https://www.npmjs.com/package/aws-opensearch-connector)
 
 A tiny [Amazon Signature Version 4](https://www.npmjs.com/package/aws4) connection class for the official [Opensearch Node.js client](https://www.npmjs.com/package/@opensearch-project/opensearch), for compatibility with AWS OpenSearch and IAM authentication.
