@@ -2,7 +2,7 @@
 
 const assert = require('assert')
 const { URL } = require('url')
-const { Connection } = require('@elastic/elasticsearch')
+const { Connection } = require('@opensearch-project/opensearch')
 const AWS = require('aws-sdk')
 
 const awsConfig = new AWS.Config({

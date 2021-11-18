@@ -1,4 +1,4 @@
-const { Transport } = require('@elastic/elasticsearch')
+const { Transport } = require('@opensearch-project/opensearch')
 
 function awaitAwsCredentials (awsConfig) {
   return new Promise((resolve, reject) => {
