@@ -51,7 +51,7 @@
     "aws4": "^1.11.0"
   },
   "peerDependencies": {
-    "opensearch-project/opensearch": ">=1.0.0",
+    "@opensearch-project/opensearch": ">=1.0.0",
     "aws-sdk": "^2.683.0"
   },
   "devDependencies": {
