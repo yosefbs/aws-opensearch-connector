@@ -17,16 +17,25 @@ module.exports = awsConfig => {
         options = {}
       }
 
-      // Promise support
-      if (typeof callback === 'undefined') {
-        return awaitAwsCredentials(awsConfig)
-          .then(() => super.request(params, options))
-      }
+      // check if getCredentials exists, if so this is an aws-sdk v2 global config object
+      if (typeof awsConfig.getCredentials !== 'function') {
+        if (typeof callback === 'undefined') {
+          return super.request(params, options)
+        } else {
+          super.request(params, options, callback)
+        }
+      } else {
+        // Promise support
+        if (typeof callback === 'undefined') {
+          return awaitAwsCredentials(awsConfig)
+            .then(() => super.request(params, options))
+        }
 
-      // Callback support
-      awaitAwsCredentials(awsConfig)
-        .then(() => super.request(params, options, callback))
-        .catch(callback)
+        // Callback support
+        awaitAwsCredentials(awsConfig)
+          .then(() => super.request(params, options, callback))
+          .catch(callback)
+      }
     }
   }
 

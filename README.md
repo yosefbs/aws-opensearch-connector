@@ -21,38 +21,77 @@ npm install --save aws-elasticsearch-connector @elastic/elasticsearch aws-sdk
 ### Using global configuration
 
 ```javascript
-const { Client } = require('@elastic/elasticsearch')
-const AWS = require('aws-sdk')
-const createAwsElasticsearchConnector = require('aws-elasticsearch-connector')
+const { Client } = require("@elastic/elasticsearch");
+const AWS = require("aws-sdk");
+const createAwsElasticsearchConnector = require("aws-elasticsearch-connector");
 
 // (Optional) load profile credentials from file
 AWS.config.update({
-  profile: 'my-profile'
-})
+  profile: "my-profile",
+});
 
 const client = new Client({
   ...createAwsElasticsearchConnector(AWS.config),
-  node: 'https://my-elasticsearch-cluster.us-east-1.es.amazonaws.com'
-})
+  node: "https://my-elasticsearch-cluster.us-east-1.es.amazonaws.com",
+});
 ```
 
 ### Using specific configuration
 
 ```javascript
-const { Client } = require('@elastic/elasticsearch')
-const AWS = require('aws-sdk')
-const createAwsElasticsearchConnector = require('aws-elasticsearch-connector')
+const { Client } = require("@elastic/elasticsearch");
+const AWS = require("aws-sdk");
+const createAwsElasticsearchConnector = require("aws-elasticsearch-connector");
 
 const awsConfig = new AWS.Config({
   // Your credentials and settings here, see
   // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html#constructor-property
-})
+});
 
 const client = new Client({
   ...createAwsElasticsearchConnector(awsConfig),
-  node: 'https://my-elasticsearch-cluster.us-east-1.es.amazonaws.com'
-})
-````
+  node: "https://my-elasticsearch-cluster.us-east-1.es.amazonaws.com",
+});
+```
+
+### Using aws-sdk v3
+
+```javascript
+const { STSClient, AssumeRoleCommand } = require("@aws-sdk/client-sts");
+const { Client } = require("@elastic/elasticsearch");
+const createAwsElasticsearchConnector = require("./src/index.js");
+
+async function ping() {
+  const creds = await assumeRole(
+    "arn:aws:iam::0123456789012:role/Administrator",
+    "us-east-1"
+  );
+  const client = new Client({
+    ...createAwsElasticsearchConnector({
+      region: "us-east-1",
+      credentials: creds,
+    }),
+    node: "https://my-elasticsearch-cluster.us-east-1.es.amazonaws.com",
+  });
+  const response = await client.ping();
+  console.log(`Got Response`, response);
+}
+
+async function assumeRole(roleArn, region) {
+  const client = new STSClient({ region });
+  const response = await client.send(
+    new AssumeRoleCommand({
+      RoleArn: roleArn,
+      RoleSessionName: "aws-es-connection",
+    })
+  );
+  return {
+    accessKeyId: response.Credentials.AccessKeyId,
+    secretAccessKey: response.Credentials.SecretAccessKey,
+    sessionToken: response.Credentials.SessionToken,
+  };
+}
+```
 
 ## Test
 
