@@ -22,6 +22,7 @@
     "node": ">= 10"
   },
   "main": "src/index.js",
+  "types": "index.d.ts",
   "scripts": {
     "publish": "git push origin --tags && npm run changelog && git push origin",
     "release:pre": "npm version prerelease && npm publish --tag pre",
