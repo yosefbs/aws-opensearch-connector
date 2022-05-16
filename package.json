@@ -55,14 +55,14 @@
   },
   "peerDependencies": {
     "@elastic/elasticsearch": ">=6",
-    "aws-sdk": "^2.793.0"
+    "aws-sdk": "^2.831.0"
   },
   "devDependencies": {
     "@elastic/elasticsearch": "^7.10.0",
     "aws-sdk": "^2.831.0",
     "minimist": "^1.2.5",
-    "mocha": "^8.2.1",
-    "nyc": "^15.1.0",
+    "mocha": "*",
+    "nyc": "*",
     "standard": "*"
   }
 }
