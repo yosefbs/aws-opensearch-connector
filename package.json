@@ -1,6 +1,6 @@
 {
   "name": "aws-elasticsearch-connector",
-  "version": "9.0.3",
+  "version": "9.1.0",
   "description": "A tiny Amazon Signature Version 4 connection class for @elastic/elasticsearch, for compatibility with AWS Elasticsearch and IAM authentication.",
   "repository": "https://github.com/compwright/aws-elasticsearch-connector",
   "bugs": "https://github.com/compwright/aws-elasticsearch-connector/issues",
