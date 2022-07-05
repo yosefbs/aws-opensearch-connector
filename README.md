@@ -50,6 +50,7 @@ const client = new Client({
 })
 
 ```
+
 ### Using aws-sdk v3
 
 ```javascript

@@ -1,12 +1,12 @@
-const { Connection } = require("@opensearch-project/opensearch");
-const aws4 = require("aws4");
+const { Connection } = require('@opensearch-project/opensearch');
+const aws4 = require('aws4');
 
 module.exports = (awsConfig) => {
   class AmazonConnection extends Connection {
     buildRequestObject(params) {
       const req = super.buildRequestObject(params);
 
-      req.service = "es";
+      req.service = 'es';
 
       if (awsConfig.region) {
         req.region = awsConfig.region;
@@ -26,12 +26,12 @@ module.exports = (awsConfig) => {
       // (`Content-Length` and `content-length`), which makes the signature fail.
       let contentLength = 0;
       if (params.body) {
-        contentLength = Buffer.byteLength(params.body, "utf8");
+        contentLength = Buffer.byteLength(params.body, 'utf8');
         req.body = params.body;
       }
-      const lengthHeader = "content-length";
+      const lengthHeader = 'content-length';
       const headerFound = Object.keys(req.headers).find(
-        (header) => header.toLowerCase() === lengthHeader
+        (header) => header.toLowerCase() === lengthHeader,
       );
       if (headerFound === undefined) {
         req.headers[lengthHeader] = contentLength;
