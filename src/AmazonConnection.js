@@ -1,44 +1,45 @@
-const { Connection } = require('@opensearch-project/opensearch')
-const aws4 = require('aws4')
+const { Connection } = require('@opensearch-project/opensearch');
+const aws4 = require('aws4');
 
-module.exports = awsConfig => {
+module.exports = (awsConfig) => {
   class AmazonConnection extends Connection {
-    buildRequestObject (params) {
-      const req = super.buildRequestObject(params)
+    buildRequestObject(params) {
+      const req = super.buildRequestObject(params);
 
-      req.service = 'es'
+      req.service = 'es';
 
       if (awsConfig.region) {
-        req.region = awsConfig.region
+        req.region = awsConfig.region;
       }
 
       if (!req.headers) {
-        req.headers = {}
+        req.headers = {};
       }
 
       // Fix the Host header, since HttpConnector.makeReqParams() appends
       // the port number which will cause signature verification to fail
-      req.headers.host = req.hostname
+      req.headers.host = req.hostname;
 
       // This fix allows the connector to work with the older 6.x elastic branch.
       // The problem with that version, is that the Transport object would add a
       // `Content-Length` header (yes with Pascal Case), thus duplicating headers
       // (`Content-Length` and `content-length`), which makes the signature fail.
-      let contentLength = 0
+      let contentLength = 0;
       if (params.body) {
-        contentLength = Buffer.byteLength(params.body, 'utf8')
-        req.body = params.body
+        contentLength = Buffer.byteLength(params.body, 'utf8');
+        req.body = params.body;
       }
-      const lengthHeader = 'content-length'
+      const lengthHeader = 'content-length';
       const headerFound = Object.keys(req.headers).find(
-        header => header.toLowerCase() === lengthHeader)
+        (header) => header.toLowerCase() === lengthHeader,
+      );
       if (headerFound === undefined) {
-        req.headers[lengthHeader] = contentLength
+        req.headers[lengthHeader] = contentLength;
       }
 
-      return aws4.sign(req, awsConfig.credentials)
+      return aws4.sign(req, awsConfig.credentials);
     }
   }
 
-  return AmazonConnection
-}
+  return AmazonConnection;
+};
