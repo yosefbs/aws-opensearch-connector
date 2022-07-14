@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
-const AWS = require("aws-sdk");
-const { Client } = require("@opensearch-project/opensearch");
-const argv = require("minimist")(process.argv.slice(2));
-const createAwsOpensearchConnector = require("../src");
+const AWS = require('aws-sdk');
+const { Client } = require('@opensearch-project/opensearch');
+const argv = require('minimist')(process.argv.slice(2));
+const createAwsOpensearchConnector = require('../src');
 
-describe("test", function () {
+describe('test', function () {
   AWS.config.update({
     region: argv.region,
     profile: argv.profile,
@@ -16,11 +16,11 @@ describe("test", function () {
     if (argv.role) {
       const roleToAssume = {
         RoleArn: argv.role,
-        RoleSessionName: "session1",
+        RoleSessionName: 'session1',
         DurationSeconds: 900,
       };
       // Create the STS service object
-      const sts = new AWS.STS({ apiVersion: "2011-06-15" });
+      const sts = new AWS.STS({ apiVersion: '2011-06-15' });
       // Assume Role
       const { Credentials } = await sts.assumeRole(roleToAssume).promise();
       AWS.config.update({
@@ -36,25 +36,25 @@ describe("test", function () {
     node: argv.endpoint,
   });
 
-  client.on("response", (err, res) => {
+  client.on('response', (err, res) => {
     if (err) {
-      console.error("Error:", err);
+      console.error('Error:', err);
     } else {
-      console.log("Request:", res.meta.request);
-      console.log("Response:", res.statusCode, res.body);
+      console.log('Request:', res.meta.request);
+      console.log('Response:', res.statusCode, res.body);
     }
   });
 
-  describe("AWS Opensearch", function () {
+  describe('AWS Opensearch', function () {
     this.timeout(10000);
     this.slow(1000);
 
-    it("should be able to connect", () => {
+    it('should be able to connect', () => {
       return client.cluster.health();
     });
 
-    it("can clearScroll()", () => {
-      return client.search({ scroll: "10s" }).then((result) => {
+    it('can clearScroll()', () => {
+      return client.search({ scroll: '10s' }).then((result) => {
         return client.clearScroll({
           body: {
             scroll_id: [result.body._scroll_id],
@@ -63,12 +63,12 @@ describe("test", function () {
       });
     });
 
-    it("handles unicode", () => {
+    it('handles unicode', () => {
       return client.search({
-        index: "*",
+        index: '*',
         size: 0,
         body: {
-          query: { query_string: { query: "ü" } },
+          query: { query_string: { query: 'ü' } },
         },
       });
     });
