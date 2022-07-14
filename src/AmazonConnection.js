@@ -31,7 +31,7 @@ module.exports = (awsConfig) => {
       }
       const lengthHeader = 'content-length';
       const headerFound = Object.keys(req.headers).find(
-        (header) => header.toLowerCase() === lengthHeader,
+        (header) => header.toLowerCase() === lengthHeader
       );
       if (headerFound === undefined) {
         req.headers[lengthHeader] = contentLength;

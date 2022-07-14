@@ -28,7 +28,7 @@ module.exports = (awsConfig) => {
         // Promise support
         if (typeof callback === 'undefined') {
           return awaitAwsCredentials(awsConfig).then(() =>
-            super.request(params, options),
+            super.request(params, options)
           );
         }
 

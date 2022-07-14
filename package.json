@@ -30,13 +30,13 @@
     "release:minor": "npm version minor && npm publish",
     "release:major": "npm version major && npm publish",
     "changelog": "github_changelog_generator -u compwright -p aws-opensearch-connector && git add CHANGELOG.md && git commit -am \"Updating changelog\"",
-    "lint": "standard src/*.js tests/*.js --fix",
+    "lint": "eslint src/*.js tests/*.js --fix",
     "pretest": "npm run lint",
     "test": "AWS_PROFILE=null nyc --all mocha tests/Amazon*.test.js",
     "test:integration": "mocha tests/integration.test.js"
   },
   "author": {
-    "name": "Jonathon Hill, yosef bs",
+    "name": "Jonathon Hill, Yosef B.S.",
     "email": "jonathon@compwright.com",
     "url": "https://compwright.com"
   },
@@ -59,10 +59,10 @@
   },
   "devDependencies": {
     "@opensearch-project/opensearch": "^1.0.0",
-    "aws-sdk": "^2.1167.0",
+    "aws-sdk":"^2.1174.0",
     "minimist": "^1.2.5",
+    "eslint":"^8.19.0",
     "mocha": "*",
-    "nyc": "*",
-    "standard": "*"
+    "nyc": "*"
   }
 }

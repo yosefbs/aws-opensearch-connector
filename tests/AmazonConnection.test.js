@@ -74,7 +74,7 @@ describe('AmazonConnection', function () {
       assert.strictEqual(req.headers['X-Amz-Date'], '20190816T205118Z');
       assert.strictEqual(
         req.headers.Authorization,
-        'AWS4-HMAC-SHA256 Credential=foo/20190816/us-east-1/es/aws4_request, SignedHeaders=content-length;content-type;date;host;x-amz-date;x-amz-security-token, Signature=5daf2e5d70fe61002e12ad3d4d8dcfcda64bb477ce764af1c30967393d83ba1f',
+        'AWS4-HMAC-SHA256 Credential=foo/20190816/us-east-1/es/aws4_request, SignedHeaders=content-length;content-type;date;host;x-amz-date;x-amz-security-token, Signature=5daf2e5d70fe61002e12ad3d4d8dcfcda64bb477ce764af1c30967393d83ba1f'
       );
     });
 

@@ -96,6 +96,12 @@ async function assumeRole(roleArn, region) {
 npm test
 
 # Run integration tests against a real endpoint
-AWS_PROFILE=your-profile npm run test:integration -- \
-  --endpoint https://my-opensearch-cluster.us-east-1.es.amazonaws.com
+AWS_SDK_LOAD_CONFIG=true AWS_PROFILE=your-profile npm run test:integration -- \
+  --endpoint https://my-opensearch-cluster.us-east-1.es.amazonaws.com 
+
+
+ # Run integration tests against a real endpoint using assume role
+  AWS_SDK_LOAD_CONFIG=true AWS_PROFILE=your-profile npm run test:integration -- \
+  --endpoint https://my-opensearch-cluster.us-east-1.es.amazonaws.com \
+  --role arn:aws:iam::123456789:role/OpenSearchAccessRole
 ```
