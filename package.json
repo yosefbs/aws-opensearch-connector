@@ -24,12 +24,11 @@
   "main": "src/index.js",
   "types": "index.d.ts",
   "scripts": {
-    "publish": "git push origin --tags && npm run changelog && git push origin",
+    "publish": "git push origin --tags && git push origin",
     "release:pre": "npm version prerelease && npm publish --tag pre",
     "release:patch": "npm version patch && npm publish",
     "release:minor": "npm version minor && npm publish",
     "release:major": "npm version major && npm publish",
-    "changelog": "github_changelog_generator -u compwright -p aws-opensearch-connector && git add CHANGELOG.md && git commit -am \"Updating changelog\"",
     "lint": "eslint src/*.js tests/*.js --fix",
     "pretest": "npm run lint",
     "test": "AWS_PROFILE=null nyc --all mocha tests/Amazon*.test.js",
