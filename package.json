@@ -1,6 +1,6 @@
 {
   "name": "aws-opensearch-connector",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A tiny Amazon Signature Version 4 connection class for @opensearch-project/opensearch, for compatibility with AWS `opensearch` and IAM authentication.",
   "repository": "https://github.com/yosefbs/aws-opensearch-connector",
   "bugs": "https://github.com/yosefbs/aws-opensearch-connector/issues",
@@ -59,9 +59,10 @@
   },
   "devDependencies": {
     "@opensearch-project/opensearch": "^1.0.0",
-    "aws-sdk":"^2.1174.0",
+    "@smithy/types": "^2.10.0",
+    "aws-sdk": "^2.1174.0",
+    "eslint": "^8.19.0",
     "minimist": "^1.2.5",
-    "eslint":"^8.19.0",
     "mocha": "*",
     "nyc": "*"
   }

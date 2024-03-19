@@ -17,58 +17,57 @@ npm install --save aws-opensearch-connector
 ### Using global configuration
 
 ```javascript
-const { Client } = require('@opensearch-project/opensearch')
-const AWS = require('aws-sdk')
-const createAwsOpensearchConnector = require('aws-opensearch-connector')
+const { Client } = require('@opensearch-project/opensearch');
+const AWS = require('aws-sdk');
+const createAwsOpensearchConnector = require('aws-opensearch-connector');
 
 // (Optional) load profile credentials from file
 AWS.config.update({
-  profile: "my-profile",
+  profile: 'my-profile',
 });
 
 const client = new Client({
   ...createAwsOpensearchConnector(AWS.config),
-  node: 'https://my-opensearch-cluster.us-east-1.es.amazonaws.com'
-})
+  node: 'https://my-opensearch-cluster.us-east-1.es.amazonaws.com',
+});
 ```
 
 ### Using specific configuration
 
 ```javascript
-const { Client } = require('@opensearch-project/opensearch')
-const AWS = require('aws-sdk')
-const createAwsOpensearchConnector = require('aws-opensearch-connector')
+const { Client } = require('@opensearch-project/opensearch');
+const AWS = require('aws-sdk');
+const createAwsOpensearchConnector = require('aws-opensearch-connector');
 
 const awsConfig = new AWS.Config({
   // Your credentials and settings here, see
   // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html#constructor-property
-})
+});
 
 const client = new Client({
   ...createAwsOpensearchConnector(awsConfig),
-  node: 'https://my-opensearch-cluster.us-east-1.es.amazonaws.com'
-})
-
+  node: 'https://my-opensearch-cluster.us-east-1.es.amazonaws.com',
+});
 ```
 
 ### Using aws-sdk v3
 
 ```javascript
-const { STSClient, AssumeRoleCommand } = require("@aws-sdk/client-sts");
-const { Client } = require('@opensearch-project/opensearch')
-const createAwsOpensearchConnector = require("./src/index.js");
+const { STSClient, AssumeRoleCommand } = require('@aws-sdk/client-sts');
+const { Client } = require('@opensearch-project/opensearch');
+const createAwsOpensearchConnector = require('./src/index.js');
 
 async function ping() {
   const creds = await assumeRole(
-    "arn:aws:iam::0123456789012:role/Administrator",
-    "us-east-1"
+    'arn:aws:iam::0123456789012:role/Administrator',
+    'us-east-1'
   );
   const client = new Client({
     ...createAwsOpensearchConnector({
-      region: "us-east-1",
+      region: 'us-east-1',
       credentials: creds,
     }),
-    node: "https://my-opensearch-cluster.us-east-1.es.amazonaws.com",
+    node: 'https://my-opensearch-cluster.us-east-1.es.amazonaws.com',
   });
   const response = await client.ping();
   console.log(`Got Response`, response);
@@ -79,7 +78,7 @@ async function assumeRole(roleArn, region) {
   const response = await client.send(
     new AssumeRoleCommand({
       RoleArn: roleArn,
-      RoleSessionName: "aws-es-connection",
+      RoleSessionName: 'aws-es-connection',
     })
   );
   return {
@@ -90,6 +89,26 @@ async function assumeRole(roleArn, region) {
 }
 ```
 
+### Using aws-sdk v3 and Lambda (Node 18+)
+
+```javascript
+const { fromEnv } = require('@aws-sdk/credential-providers');
+const { Client } = require('@opensearch-project/opensearch');
+const createAwsOpensearchConnector = require('./src/index.js');
+
+async function ping() {
+  const client = new Client({
+    ...createAwsOpensearchConnector({
+      region: 'us-east-1',
+      credentials: await fromEnv()(),
+    }),
+    node: 'https://my-opensearch-cluster.us-east-1.es.amazonaws.com',
+  });
+  const response = await client.ping();
+  console.log(`Got Response`, response);
+}
+```
+
 ## Test
 
 ```bash
@@ -97,7 +116,7 @@ npm test
 
 # Run integration tests against a real endpoint
 AWS_SDK_LOAD_CONFIG=true AWS_PROFILE=your-profile npm run test:integration -- \
-  --endpoint https://my-opensearch-cluster.us-east-1.es.amazonaws.com 
+  --endpoint https://my-opensearch-cluster.us-east-1.es.amazonaws.com
 
 
  # Run integration tests against a real endpoint using assume role
